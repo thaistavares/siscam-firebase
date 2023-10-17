@@ -15,13 +15,13 @@ const firebaseConfig = {
   
   // Inicialize o Cloud Firestore
   const db = firebase.firestore();
-  
-  // Referência à coleção 'exemplo'
-  const exemploCollection = db.collection('Perfil');
+  /*
+  // Referência à coleção 'Perfil'
+  const profileCollection = db.collection('Perfil');
   
   // Função para consultar dados no Firestore
   function consultarDados() {
-    exemploCollection.get()
+    profileCollection.get()
       .then((querySnapshot) => {
         const dataList = document.getElementById('data-list');
         dataList.innerHTML = ''; // Limpar a lista antes de recriá-la
@@ -46,4 +46,40 @@ const firebaseConfig = {
   
   // Chame a função de consulta ao carregar a página
   consultarDados();
+
+// Referência à coleção 'PessoaPerfil'
+const pessoaPerfilCollection = db.collection('PessoaPerfil');
+
+// Defina a condição de consulta (idPessoa igual a 2e3SXl5t6m7uRzyidwBY)
+const query = pessoaPerfilCollection.where('idPessoa', '==', '2e3SXl5t6m7uRzyidwBY');
+
+// Execute a consulta
+query.get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      const pessoaPerfil = doc.data();
+      console.log(pessoaPerfil);
+    });
+  })
+  .catch((error) => {
+    console.error('Erro ao consultar dados: ', error);
+  });
+*/
+  // Referência à coleção 'Pessoa'
+const pessoaCollection = db.collection('Pessoa');
+
+// Defina a condição de consulta (id igual a 2e3SXl5t6m7uRzyidwBY)
+const query = pessoaCollection.where(firebase.firestore.FieldPath.documentId(), '==', '2e3SXl5t6m7uRzyidwBY');
+
+// Execute a consulta
+query.get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      const pessoa = doc.data();
+      console.log(pessoa);
+    });
+  })
+  .catch((error) => {
+    console.error('Erro ao consultar dados: ', error);
+  });
   
